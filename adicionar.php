@@ -1,4 +1,5 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet/>
+<script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
 
 <?
 
@@ -38,5 +39,9 @@ $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 $stmt->bindParam(':cidade', $cidade, PDO::PARAM_STR);
 $stmt->bindParam(':idade', $idade, PDO::PARAM_INT);
 
+$stmt->execute();
+
+
+echo "<div class=\"alert alert-success\">Usuário Cadastrado Com Sucesso!!!</div>";
 
 }
