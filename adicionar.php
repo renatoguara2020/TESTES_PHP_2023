@@ -32,4 +32,11 @@ echo " <br /><a href='javascript:self.history.back();'>Go Back</a>";
 }else{
 
 $stmt = $conn->prepare("INSERT INTO users (nome, email, cidade, idade) VALUES (:nome, :email, :cidade, :idade)");
+
+$stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
+$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+$stmt->bindParam(':cidade', $cidade, PDO::PARAM_STR);
+$stmt->bindParam(':idade', $idade, PDO::PARAM_INT);
+
+
 }
