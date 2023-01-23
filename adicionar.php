@@ -6,20 +6,20 @@
 include_once('connection.php');
 
 if(isset($_POST['Submit'])){
-// if(isset($_POST['nome']) || isset($_POST['email']) || isset($_POST['cidade']) || isset($_POST['idade'])){
+ if(isset($_POST['nome']) || isset($_POST['email']) || isset($_POST['cidade']) || isset($_POST['idade'])){
 
 
-$nome = $_POST['nome'];
+$nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS);
 
 
-$email = $_POST['email'];
+$email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
 
-$cidade = $_POST['cidade'];
+$cidade = filter_input(INPUT_POST, 'cidade', FILTER_SANITIZE_SPECIAL_CHARS);
 
-$idade = $_POST['idade'];
+$idade = filter_input(INPUT_POST, 'idade', FILTER_SANITIZE_SPECIAL_CHARS);
 
 
-
+ }
 
 $stmt = $conn->prepare("INSERT INTO users(nome, email, cidade, idade)VALUES(:nome, :email, :cidade, :idade)");
 $conn->exec("set names utf8mb4");
