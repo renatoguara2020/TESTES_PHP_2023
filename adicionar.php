@@ -4,31 +4,32 @@
 
 include_once('connection.php');
 
-if (empty($_POST['nome'] || empty($_POST['email']) || empty($_POST['cidade']) || empty($_POST['idade']))){
+if (!empty($_POST['nome'] || !empty($_POST['email']) || !empty($_POST['cidade']) || !empty($_POST['idade']))){
 
-    if(!isset($_POST['nome'])){
+    if(isset($_POST['nome'])){
 
-        echo " <div class=\"alert alert-danger\">Digite seu Nome</div>";
+   $nome = filter_input(INPUT_POST ,'nome', FILTER_SANITIZE_SPECIAL_CHARS);
 }
-if(!isset($_POST['email'])){
+if(isset($_POST['email'])){
 
-echo "<div class=\"alert alert-danger\"> Digite seu Email</div>";
-}
-
-if(!isset($_POST['cidade'])){
-
-echo "<div class=\"alert alert-danger\">Digite sua cidade </div>";
+   $email = filter_input(INPUT_POST ,'email', FILTER_SANITIZE_SPECIAL_CHARS);
 }
 
-if(!isset($_POST['idade'])){
+if(isset($_POST['cidade'])){
 
-echo "<div class=\"alert alert-danger\">Digite sua idade </div>";
+   $cidade = filter_input(INPUT_POST ,'cidade', FILTER_SANITIZE_SPECIAL_CHARS);
+}
+
+if(isset($_POST['idade'])){
+
+$idade = filter_input(INPUT_POST ,'idade', FILTER_SANITIZE_SPECIAL_CHARS);
 
 
 }
-
+//link to the previous page
+echo " <br /><a href='javascript:self.history.back();'>Go Back</a>";
 
 }else{
 
-
+$stmt = $conn->prepare("INSERT INTO users (nome, email, cidade, idade) VALUES (:nome, :email, :cidade, :idade)");
 }
