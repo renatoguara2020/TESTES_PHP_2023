@@ -1,39 +1,28 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet/>
 <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js">
 
-<?
+<?php
 
 include_once('connection.php');
 
-if (!empty($_POST['nome'] || !empty($_POST['email']) || !empty($_POST['cidade']) || !empty($_POST['idade']))){
-
-    if(isset($_POST['nome'])){
-
-   $nome = filter_input(INPUT_POST ,'nome', FILTER_SANITIZE_SPECIAL_CHARS);
-}
-if(isset($_POST['email'])){
-
-   $email = filter_input(INPUT_POST ,'email', FILTER_SANITIZE_SPECIAL_CHARS);
-}
-
-if(isset($_POST['cidade'])){
-
-   $cidade = filter_input(INPUT_POST ,'cidade', FILTER_SANITIZE_SPECIAL_CHARS);
-}
-
-if(isset($_POST['idade'])){
-
-$idade = filter_input(INPUT_POST ,'idade', FILTER_SANITIZE_SPECIAL_CHARS);
+if(isset($_POST['Submit'])){
+// if(isset($_POST['nome']) || isset($_POST['email']) || isset($_POST['cidade']) || isset($_POST['idade'])){
 
 
-}
-//link to the previous page
-echo " <br /><a href='javascript:self.history.back();'>Go Back</a>";
+$nome = $_POST['nome'];
 
-}else{
 
-$stmt = $conn->prepare("INSERT INTO users (nome, email, cidade, idade) VALUES (:nome, :email, :cidade, :idade)");
+$email = $_POST['email'];
 
+$cidade = $_POST['cidade'];
+
+$idade = $_POST['idade'];
+
+
+
+
+$stmt = $conn->prepare("INSERT INTO users(nome, email, cidade, idade)VALUES(:nome, :email, :cidade, :idade)");
+$conn->exec("set names utf8mb4");
 $stmt->bindParam(':nome', $nome, PDO::PARAM_STR);
 $stmt->bindParam(':email', $email, PDO::PARAM_STR);
 $stmt->bindParam(':cidade', $cidade, PDO::PARAM_STR);
@@ -43,5 +32,8 @@ $stmt->execute();
 
 
 echo "<div class=\"alert alert-success\">Usuário Cadastrado Com Sucesso!!!</div>";
+
+header("Location: http://localhost/testes_php_2023/index.php");
+
 
 }
